@@ -5,6 +5,7 @@
 #as possible without exceeding 21, called going bust.
 import random
 
+#Functions to reveal hands in console
 def showPlayerHand(playerHand):
     print("Your hand: ", playerHand)
 
@@ -13,16 +14,28 @@ def showDealerHand(dealerHand):
 
 def draw():
     #Variables that track the hands and the decision to continue drawing
-    playerHand = random.randrange(1, 11)
-    dealerHand = random.randrange(1, 11)
+    playerHand = 0
+    dealerHand = 0
     decision = 'y'
     
     #Runs until player decides to stop drawing or exceeds 21
     while (decision != 'n' and playerHand <= 21):
-        decision = input("Would you like to draw")
+        playerHand += random.randrange(1, 11)
+        dealerHand += random.randrange(1, 11)
+        showPlayerHand(playerHand)
+        decision = input("Would you like to draw?(y/n) ")
+    return dealerHand, playerHand
+
+def compare(playerHand, dealerHand):
+    winner = "No winner"
+    if playerHand <= 21 and dealerHand <= 21:
+        if playerHand > dealerHand:
+            winner = "Player"
+            return winner
+        else:
+            winner = "Dealer"
+            return winner
+
 
 if __name__ == '__main__':
-    playerHand = 15
-    dealerHand = 12
-    showPlayerHand(playerHand)
-    showDealerHand(dealerHand)
+    print("Welcome to Lucky 21 Casino!")
